@@ -11,18 +11,22 @@
         <div id="headTittle">
             <img src="./img/bird0.png" alt="" id="headBird">
         </div>
-        <button id="startBtn"></button>
+        <button id="startBtn" onclick=""></button>
         <div id="grassLand1"></div>
         <div id="grassLand2"></div>
     </div>
+    <script src="./bird.js"></script>
+    <script src="./utils.js"></script>
     <script>
         var jsHeaderTittle=document.getElementById('headTittle')
         var jsHeadbird=document.getElementById('headBird')
+        var jsWrapBg=document.getElementById('wrapBg')
+        var blockArr=[]
         //标题的摆动
         var Y=3
         var imgArr=['./img/bird0.png','./img/bird1.png']
         var index=0
-        setInterval(headWave,200)  
+        var headWaveTimer=setInterval(headWave,200)  
 
         function headWave(){
             Y=Y*-1
@@ -34,14 +38,65 @@
         //草地移动
         var jsGrassLand1=document.getElementById('grassLand1')
         var jsGrassLand2=document.getElementById('grassLand2')
-        setInterval(landrun,30)
+        var landTimer=setInterval(landrun,30)
         function landrun(){
             jsGrassLand1.style.left=jsGrassLand1.offsetLeft-3+'px';
             jsGrassLand2.style.left=jsGrassLand2.offsetLeft-3+'px';
             if(jsGrassLand1.offsetLeft<=-343)jsGrassLand1.style.left=343+'px';
             if(jsGrassLand2.offsetLeft<=-343)jsGrassLand2.style.left=343+'px';
 
+            //管道移动
+            var blockDistance=baseObj.randomNum(120,130)
+            if(blockArr.length>0){
+                for(var i=0;i<blockArr.length;i++){
+                    blockArr[i].moveBlock()
+                    //检测碰撞
+                    var x=baseObj.rectangleCrashExamine(blockArr[i].upDivWrap,bird.div)
+                    var y=baseObj.rectangleCrashExamine(blockArr[i].downDivWrap,bird.div)
+                    var z=bird.div.offsetTop>=390
+                    if(x||y||z){
+                        clearInterval(landTimer)
+                    }
+                }
+                //下一根管道的生成
+                if(blockArr[blockArr.length-1].downDivWrap.offsetLeft<(450-blockDistance)){
+                    var newBlock=new Block()
+                    newBlock.createBlock()
+                    blockArr.push(newBlock)
+                }
+            }
+            //清除左侧多余管道
+            if(blockArr[0].downDivWrap.offsetLeft<-70){
+                jsWrapBg.removeChild(blockArr[0].upDivWrap)
+                jsWrapBg.removeChild(blockArr[0].downDivWrap)
+                blockArr.shift()
+            }
+        }
+    
+        //点击开始
+        var jsStartBtn=document.getElementById('startBtn')
+        jsStartBtn.onclick=function(){
+            //让标题和按钮本身全部消失
+            jsHeaderTittle.style.display='none'
+            jsStartBtn.style.display='none'
+            clearInterval(headWaveTimer)
+
+            //小鸟出现
+            bird.showBird(jsWrapBg)
+            bird.flyBird()
+            bird.wingWave()
+            jsWrapBg.onclick=function(){
+                bird.fallSpeed=-8
+            }
+
+            //管道出现
+            var b=new Block()
+            b.createBlock()
+            blockArr.push(b)
+            
         }
     </script>
+    <script src="./block.js"></script>
+
 </body>
 </html>

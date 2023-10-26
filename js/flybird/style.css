@@ -32,6 +32,7 @@ body{
     position: absolute;
     left:129px;
     top:250px;
+    cursor: pointer;
 }
 #grassLand1{
     width: 343px;
