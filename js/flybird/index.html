@@ -56,6 +56,7 @@
                     var z=bird.div.offsetTop>=390
                     if(x||y||z){
                         clearInterval(landTimer)
+                        jsWrapBg.onclick=null
                     }
                 }
                 //下一根管道的生成
@@ -64,14 +65,13 @@
                     newBlock.createBlock()
                     blockArr.push(newBlock)
                 }
-            }
             //清除左侧多余管道
             if(blockArr[0].downDivWrap.offsetLeft<-70){
                 jsWrapBg.removeChild(blockArr[0].upDivWrap)
                 jsWrapBg.removeChild(blockArr[0].downDivWrap)
                 blockArr.shift()
             }
-        }
+        }}
     
         //点击开始
         var jsStartBtn=document.getElementById('startBtn')
