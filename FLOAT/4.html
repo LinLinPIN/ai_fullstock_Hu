@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            width:200px;
+            height: 100px;
+            background-color: rgb(201, 35, 35);
+            list-style: none;
+            float: left;
+        }
+        ul{
+        }
+        .clear{
+            clear: both;
+        }
+        .content{
+            width:100%;
+            height: 200px;
+            background-color: rgb(201, 135, 35);
+        }
+        .clear::after{
+            content:' ';
+            clear:both;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <ul class="clear">
+        <li></li>
+        <li></li>
+        <li></li>
+        <!-- <div class="clear"></div> -->
+
+    </ul>
+    <div class="content"></div>
+</body>
+</html>
