@@ -8,3 +8,20 @@
 - 我们使用node.js的commonjs模块化机制
     model.exports=输出的对象
     require
+
+## 算法思想
+
+- 暴力破解能快速解决问题，只是思考简单，执行很容易超时
+    leetcode的起始点是规避暴力法
+    - 缓存数组的长度
+    - O(n^2) -> O(nlogn) -> O(n)
+    - 数组的方法有哪一个可以用来去除一层循环
+    - 优点是兼容性更好
+
+- indexOf 更好语义的提供了去重功能，代码更优雅
+    需要 arr.indexOf 的支持
+- 为false的判断
+    - 0 '' false undefined null NaN
+
+- 先排序，再判断当前项是否和前一项一样
+
