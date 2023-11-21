@@ -8,6 +8,8 @@
     . i p y n b  n o t e b o o k
 - pipeline 核心模块，启动模块
     水管子
+- pipeline(task,model)
+    遥遥领先，中文模型
 
 - !pip install transformers//导入transformers
  from transformers import pipeline   #pipeline 加载器模块 加载各种NLP任务

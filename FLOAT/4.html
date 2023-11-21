@@ -16,21 +16,19 @@
             list-style: none;
             float: left;
         }
-        ul{
-        }
-        .clear{
+        /* .clear{
             clear: both;
-        }
+        } */
         .content{
             width:100%;
             height: 200px;
             background-color: rgb(201, 135, 35);
         }
-        .clear::after{
+        /* .clear::after{
             content:' ';
             clear:both;
             display: block;
-        }
+        } */
     </style>
 </head>
 <body>
@@ -38,8 +36,7 @@
         <li></li>
         <li></li>
         <li></li>
-        <!-- <div class="clear"></div> -->
-
+        <div style="clear: both;"></div>
     </ul>
     <div class="content"></div>
 </body>

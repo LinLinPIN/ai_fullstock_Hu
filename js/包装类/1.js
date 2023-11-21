@@ -11,15 +11,15 @@
 // let data=new Date()
 
 
-// let a=1
-// let b=a
-// a=2
-// console.log(b);
-
-
-let a={
-    age:18
-}
+let a=1
 let b=a
-a.age=20
-console.log(b.age);
+a=2
+console.log(b);
+
+
+// let a={
+//     age:18
+// }
+// let b=a
+// a.age=20
+// console.log(b.age);

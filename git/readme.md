@@ -47,7 +47,7 @@
 - 可以通过git reset 快速来到任何一个版本
     version control
     git reset --hard HEAD^  到提交的上一个版本
-    git reset --hart id 到对应的id的版本
+    git reset --hard id 到对应的id的版本
     
 - git reflog 记录所有的操作记录
     更好的进行版本控制
