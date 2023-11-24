@@ -13,3 +13,7 @@
 
 
 # 深拷贝
+let obj2 = JSON.parse(JSON.stringify(obj))
+但是这个方法有缺陷：
+1. 不能处理undefined，function，Symbol这些数据类型
+2. 无法处理循环引用

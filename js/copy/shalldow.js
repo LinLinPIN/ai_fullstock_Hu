@@ -7,6 +7,8 @@ let obj = {
 }
 
 function shallowCopy(obj){
+    if(!(obj instanceof Object)) return 
+    // 如果形参obj是数组就创建数组，否则创建对象
     if(Object.prototype.toString.call(obj).slice(8,-1)==='Object')
     {let objCopy = {} }
     else {
