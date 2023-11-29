@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="todos"></ul>
+    <script>
+        // const todos = document.getElementById("todos")
+        // const xhr =new XMLHttpRequest()// 实例化xhr对象，它可以主动发起http请求
+        // xhr.open('GET','http://localhost:3000/todos')
+        // xhr.send()
+        // xhr.onreadystatechange=function (e){
+        //     if(e.target.readyState === 4 && e.target.status ===200){
+        //         const data = JSON.parse(e.target.responseText)
+        //         console.log(data);
+        //         todos.innerHTML = data.map(todo => `
+        //         <li>
+        //             ${todo.txt}
+        //         </li>
+        //         `).join('')
+        //     }
+        // }
+        // fetch ajax -> 高级 es7 async await
+        (async function(){
+            console.log(fetch('http://localhost:3000/todos'));
+            const todosUL =document.getElementById('todos')
+            // 由es6提供的promise类，有then 控制流程的方法
+            实例化时接受的参数s
+            const p = new Promise((resolve)=>{
+                // setTimeout(()=>{
+                //     resolve()
+                // },1000)
+            })// 实例化时接受一个函数为参数
+            p.then(()=>{
+                console.log('hello');
+            })
+            // const res = await fetch('http://localhost:3000/todos')
+            // const data = await res.json()
+            // console.log(data);
+            // console.log('hello');
+
+            // fetch('http://localhost:3000/todos')
+            // .then(res => res.join())
+            // .then(data => {
+            //     console.log(data);
+            //     console.log(hello);
+            // })
+        })()
+    </script>
+</body>
+</html>
