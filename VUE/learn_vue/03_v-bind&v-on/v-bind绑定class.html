@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active{color:red;}
+        .name{color: blue;}
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <template id="my-app">
+       <h2 :class="className">很强</h2>
+       <h2 :class="{'active':isActive}">很强</h2>
+       <button @click="toogle">切换</button>
+
+       <h2 class="name" :class="getClass()">很帅</h2>
+       <h2 :class="[isActive?'active':'name']">大佬</h2>
+
+       <div :abc="isActive">hello world</div>
+    </template>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.3.4/vue.global.js"></script>
+    <script>
+        Vue.createApp({
+            template:'#my-app',
+            data(){
+                return {
+                    className:'active',
+                    isActive:true,
+                    classObj:{
+                        active:true,
+                    }
+                }
+            },
+            methods:{
+                getClass(){
+                    return{
+                        active:true,
+                        tittle:true
+                    }
+                },
+                toogle(){
+                    this.isActive=!this.isActive
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>

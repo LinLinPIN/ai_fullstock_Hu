@@ -8,23 +8,22 @@
 <body>
     <div id="app"></div>
     <template id="my-app">
-        <h2>{{msg}}</h2>
-        <h2 v-text="msg"></h2>
-        <h2 v-html="msg"></h2>
-        <h1 v-html="article"></h1>
+        <img width="200" v-bind:src="imgUrl" alt="">
+        <a :href="link">跳转</a> 
+
     </template>
+
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.3.4/vue.global.js"></script>
     <script>
-        const app = Vue.createApp({
-            template:"#my-app",
+        Vue.createApp({
+            template:'#my-app',
             data(){
                 return {
-                    msg:'指令的使用',
-                    article:'<p>这是第一个段落</p><p>这是第二个段落</p>'
+                    imgUrl:"https://img1.baidu.com/it/u=3519458463,1887460190&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
+                    ,link:'https://www.baidu.com'
                 }
             }
-        })
-        app.mount('#app')
+        }).mount('#app')
     </script>
 </body>
 </html>
