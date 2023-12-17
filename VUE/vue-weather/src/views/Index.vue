@@ -18,16 +18,16 @@
             </div>
         </div>
 
-        <div class="future">
+        <div class="future" v-if="futureData.length > 0">
             <div class="group">
                 明天：
-                <span class="tm">白天：1℃ 雪 北风 4</span>
-                <span class="tm">夜间：1℃ 雪 北风 4</span>
+                <span class="tm">白天：{{futureData[0].dayTemp}}℃ {{ futureData[0].dayWeather }} {{futureData[0].dayWindDir}}风 {{ futureData[0].dayWindPower }}</span>
+                <span class="tm">夜间：{{futureData[0].nightTemp}}℃ {{ futureData[0].nightWeather }} {{futureData[0].nightWindDir}}风 {{ futureData[0].nightWindPower }}</span>
             </div>
             <div class="group">
                 后天：
-                <span class="tm">白天：1℃ 雪 北风 4</span>
-                <span class="tm">夜间：1℃ 雪 北风 4</span>
+                <span class="tm">白天：{{futureData[1].dayTemp}}℃ {{ futureData[1].dayWeather }} {{futureData[1].dayWindDir}}风 {{ futureData[1].dayWindPower }}</span>
+                <span class="tm">夜间：{{futureData[1].nightTemp}}℃ {{ futureData[1].nightWeather }} {{futureData[1].nightWindDir}}风 {{ futureData[1].nightWindPower }}</span>
             </div>
         </div>
     </div>
@@ -39,7 +39,8 @@ export default {
     data() {
         return {
             localTime: '',
-            mapData:{}
+            mapData: {},
+            futureData:{}
         }
     },
     created() {// 页面在加载过程中自动执行的函数--生命周期函数
@@ -50,7 +51,7 @@ export default {
     },
     methods: {
         initAMap() {
-            let that =this
+            let that = this
             AMapLoader.load({
                 key: "0e4d78357004c1a47e3d0a9429385da1", // 申请好的Web端开发者Key，首次调用 load 时必填
                 version: "2.0", // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
@@ -64,13 +65,13 @@ export default {
                             console.log(result);
 
 
-                            that.getWeatherDate(AMap,result.city)
+                            that.getWeatherDate(AMap, result.city)
                         }
                     })
                 })
             })
         },
-        getWeatherDate(AMap,cityName) {
+        getWeatherDate(AMap, cityName) {
             let that = this
             //加载天气查询插件
             AMap.plugin('AMap.Weather', function () {
@@ -81,6 +82,10 @@ export default {
                 weather.getLive(cityName, function (err, data) {
                     // console.log(err, data);
                     that.mapData = data
+                });
+                weather.getForecast(cityName, function (err, data) {
+                    console.log(err, data);
+                    that.futureData = data.forecasts.slice(1,3)
                 });
             });
         }
@@ -114,14 +119,16 @@ export default {
             }
         }
     }
-    .future{
+
+    .future {
         padding: 0 10px;
         margin-top: 30px;
-        .group{
+
+        .group {
             height: 44px;
-            line-height: 4px;
+            line-height: 44px;
             border-radius: 4px;
-            background: rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.3);
             color: #fff;
             font-size: 13px;
             margin-bottom: 10px;
