@@ -2,7 +2,7 @@
     <section>
       <header class="top_tips">
         <span class="num_tip" v-if="parentComponent === 'home'">第一周</span>
-        <span class="num_tip" v-if="parentComponent === 'item'">题目一</span>
+        <span class="num_tip" v-if="parentComponent === 'item'">题目{{ itemNum }}</span>
       </header>
   
       <!-- home -->
@@ -14,35 +14,35 @@
       <!-- item -->
       <div v-if="parentComponent === 'item'">
         <div class="item_back item_container_style">
-          <div class="item_list_container">
-            <header class="item_title">{{ questions[0].titel }}</header>
+          <div class="item_list_container" v-if="questionList.length">
+            <header class="item_title">{{ questionList[itemNum-1].topic_name }}</header>
             <ul>
-              <li class="item_list" v-for="(item,index) in questions[0].answers">
-                <span class="option_style">{{ chooseType(index) }}</span>
-                <span class="option_detail">{{ item }}</span>
+              <li class="item_list" v-for="(item,index) in questionList[itemNum-1].topic_answer" @click="choosed(index)">
+                <span class="option_style" :class="{'current': currentNum === index}">{{ chooseType(index,item.topic_answer_id) }}</span>
+                <span class="option_detail">{{ item.answer_name }}</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <span class="next_item button_style"></span>
+        <span class="next_item button_style" @click="nextItem" v-if="itemNum < questionList.length"></span>
+        <span class="submit_item button_style" @click="submit" v-else></span>
       </div>
   
     </section>
   </template>
   
   <script>
+  import { mapState, mapActions } from 'vuex';
     export default {
       props: ['parentComponent'],
+      computed:{
+        ...mapState(['questionList','itemNum']),
+      },
       data(){
         return{
-        questions: [
-          {id: 1, titel: '题目一', answers: ['答案1', '答案2', '答案3', '答案4']},
-          {id: 2, titel: '题目二', answers: ['答案1', '答案2', '答案3', '答案4']},
-          {id: 3, titel: '题目三', answers: ['答案1', '答案2', '答案3', '答案4']},
-          {id: 4, titel: '题目四', answers: ['答案1', '答案2', '答案3', '答案4']},
-          {id: 5, titel: '题目五', answers: ['答案1', '答案2', '答案3', '答案4']},
-        ]
+          currentNum: null,// 有没有选中一个答案
+          chooseId:null // 最终有没有确认一个答案
         }
       },
     methods:{
@@ -51,7 +51,30 @@
         if(index === 1 ) return 'B';
         if(index === 2 ) return 'C';
         if(index === 3 ) return 'D';
-     }   
+     },
+     ...mapActions(['nextItemAction']),
+     nextItem(){
+      if(this.currentNum !==null)
+          { this.nextItemAction(this.chooseId)
+            this.currentNum=null
+          }
+      else{
+        alert('请选择一个答案')
+      }
+     },
+     choosed(index,id){
+      // 点谁谁就高亮，保存被选中的答案
+        this.currentNum = index
+        this.chooseId = id
+    },
+    submit(){
+      if(this.currentNum !== null){
+        this.nextItemAction(this.chooseId)
+        this.$router.push('/score')
+      }else{
+        alert('请选择一个答案')
+      }
+    }   
     }
     }
   </script>
@@ -134,10 +157,19 @@
         text-align: center;
         font-family: 'Arial';
         margin-right: 0.3rem;
+
+        &.current{
+          background-color: #ffd400;
+          color: #575757;
+          border-color: #ffd400;
+        }
       }
     }
   }
   .next_item{
     background-image: url(../assets/images/2-2.png);
+  }
+  .submit_item{
+    background-image: url(../assets/images/3-1.png);
   }
   </style>
