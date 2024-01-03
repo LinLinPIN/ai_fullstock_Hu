@@ -1,10 +1,10 @@
-import { createRouter, viewDepthKey,createWebHashHistory } from 'vue-router'
+import { createRouter, viewDepthKey,createWebHashHistory,createWebHistory } from 'vue-router'
 // 路由配置
 // #/movie /movie前端路由的两种形式 #/hash /history
 
 // 路由单例
 const router = createRouter({
-  history:createWebHashHistory(),
+  history:createWebHistory(),
   // 路由数组
   routes:[
     {
@@ -23,7 +23,15 @@ const router = createRouter({
           menu:'discover',//menu
           keepAlive:true
         }
-      }]
+      },{
+        path:'music',
+        name:'music',
+        component:()=>import('../views/music/Music.vue'),
+        meta:{
+          menu:'music',
+          keepAlive:true
+        }
+      },]
     }
   ]
 })
