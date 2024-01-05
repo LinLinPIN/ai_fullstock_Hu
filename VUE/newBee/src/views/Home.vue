@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <header class="home-header active">
+        <header class="home-header">
             <router-link to="#">
                 <i class="iconfont icon-menu"></i>
             </router-link>
@@ -13,20 +13,34 @@
 
             <router-link to="/login" class="login">登录</router-link>
         </header>
+        <Swiper id="test" :list="state.swiperList"/>
     </div>
 </template>
 
 <script setup>
-import router from '../router';
+import Swiper from '../components/Swiper.vue'
+import { onMounted,reactive } from 'vue';
+import { getHome } from '@/api/home.js'
 
+const state = reactive({
+    swiperList:[]
+})
 
+// 请求banner数据
+onMounted(async()=>{
+    const { data } = await getHome()
+    console.log(data);
+    state.swiperList = data.data.carousels
+})
 </script>
 
 <style lang="less" scoped>
 @import '@/common/style/mixin.less';
+
 .home{
     padding-bottom: 100px;
     .home-header{
+        z-index: 999;
         position: fixed;
         top: 0;
         left: 0;

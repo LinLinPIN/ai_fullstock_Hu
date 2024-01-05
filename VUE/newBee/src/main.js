@@ -8,9 +8,11 @@ import router from './router'
 import { Button } from 'vant';
 // 2. 引入组件样式
 import 'vant/lib/index.css';
-
+import { Swipe, SwipeItem } from 'vant';
 
 const app = createApp(App)
 app.use(Button)
 app.use(router)
+app.use(Swipe);
+app.use(SwipeItem);
 app.mount('#app')
