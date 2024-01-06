@@ -10,10 +10,14 @@ import { Button,Skeleton } from 'vant';
 import 'vant/lib/index.css';
 import { Swipe, SwipeItem } from 'vant';
 
+import { Tabbar, TabbarItem } from 'vant';
+
 const app = createApp(App)
 app.use(Button)
 app.use(router)
 app.use(Swipe);
 app.use(SwipeItem);
 app.use(Skeleton)
+app.use(Tabbar);
+app.use(TabbarItem);
 app.mount('#app')

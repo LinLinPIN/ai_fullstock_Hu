@@ -1,11 +1,11 @@
 <template>
     <div class="goods">
-        <header class="goods-header">新品上线</header>
+        <header class="goods-header">{{ name }}</header>
     <van-skeleton title avatar :row="3" :loading="loading">
         <div class="goods-box">
-            <div class="goods-item" v-for="item in list" :key="item.goodsId">
+            <div class="goods-item" v-for="item in list" :key="item.goodsId" @click="goGoodsDetail(item.goodsId)">
                 <img :src="item.goodsCoverImg" alt="">
-                <div class="goods-desc">
+                <div class="goods-desc"> 
                     <div class="title">{{ item.goodsName }}</div>
                     <div class="price">￥{{ item.sellingPrice }}</div>
                 </div>
@@ -16,14 +16,28 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref,computed } from 'vue';
 import { defineProps } from 'vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
-    list:Array
+    list:Array,
+    name:String
 })
 
-const loading = ref(false)
+// const loading = ref(true)
+const router = useRouter()
+
+const loading = computed(()=>{
+    if(props.list.length > 0 ){
+        return false
+    }
+    return true
+})
+const goGoodsDetail = (id) => {
+    // 将这件商品的id传递给详情页
+    router.push({path:'/product',query:{id:id}})
+}
 </script>
 
 <style lang="less" scoped>

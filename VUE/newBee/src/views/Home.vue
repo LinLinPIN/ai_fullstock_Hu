@@ -20,7 +20,12 @@
                 <span>{{ item.name }}</span>
             </div>
         </div>
-        <GoodsList :list="state.newGoodsList"/>
+        <GoodsList :list="state.newGoodsList" name="新品上线"/>
+        <GoodsList :list="state.hotGoodsList" name="热门商品"/>
+        <GoodsList :list="state.recommendGoodsList" name="最新推荐"/>
+
+        <!-- footBar -->
+        <NavBar />
     </div>
 </template>
 
@@ -30,6 +35,7 @@ import { onMounted,reactive } from 'vue';
 import { getHome } from '@/api/home.js'
 import { showToast } from 'vant';
 import GoodsList from '../components/GoodsList.vue';
+import NavBar from '../components/NavBar.vue';
 
 const state = reactive({
     swiperList:[],
@@ -76,7 +82,9 @@ const state = reactive({
           categoryId: 100010
         }
       ],
-      newGoodsList:[]
+    newGoodsList:[],
+    hotGoodsList:[],
+    recommendGoodsList:[]
 })
 
 // 请求banner数据
@@ -85,6 +93,8 @@ onMounted(async()=>{
     console.log(data);
     state.swiperList = data.data.carousels
     state.newGoodsList = data.data.newGoodses
+    state.hotGoodsList = data.data.hotGoodses
+    state.recommendGoodsList = data.data.recommendGoodses
 })
 
 const goDetail = (name) =>{
