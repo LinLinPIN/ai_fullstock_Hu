@@ -5,7 +5,7 @@ import './assets/style/reset.css'
 import router from './router'
 
 // 1. 引入你需要的组件
-import { Button } from 'vant';
+import { Button,Skeleton } from 'vant';
 // 2. 引入组件样式
 import 'vant/lib/index.css';
 import { Swipe, SwipeItem } from 'vant';
@@ -15,4 +15,5 @@ app.use(Button)
 app.use(router)
 app.use(Swipe);
 app.use(SwipeItem);
+app.use(Skeleton)
 app.mount('#app')
