@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <header class="home-header">
+        <header class="home-header" :class="{'active': state.headerActive}">
             <router-link to="#">
                 <i class="iconfont icon-menu"></i>
             </router-link>
@@ -31,7 +31,7 @@
 
 <script setup>
 import Swiper from '@/components/Swiper.vue';
-import { onMounted,reactive } from 'vue';
+import { onMounted,reactive,nextTick } from 'vue';
 import { getHome } from '@/api/home.js'
 import { showToast } from 'vant';
 import GoodsList from '../components/GoodsList.vue';
@@ -84,7 +84,8 @@ const state = reactive({
       ],
     newGoodsList:[],
     hotGoodsList:[],
-    recommendGoodsList:[]
+    recommendGoodsList:[],
+    headerActive: false
 })
 
 // 请求banner数据
@@ -100,6 +101,15 @@ onMounted(async()=>{
 const goDetail = (name) =>{
     showToast(name);
 }
+
+nextTick(()=>{// 写在nextTick中的逻辑一定会在页面加载完毕后执行
+    document.body.addEventListener('scroll',function(){
+        if(this.scrollTop > 100){
+        state.headerActive = true
+    }
+    else {state.headerActive = false}
+    })
+})  
 </script>
 
 <style lang="less" scoped>
