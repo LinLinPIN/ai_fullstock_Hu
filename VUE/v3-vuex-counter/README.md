@@ -39,3 +39,32 @@
         - 组件 UI 模块
     - main.js 
         import { createPinia } from 'pinia'
+
+- 网易云音乐
+
+- 前后端分离 开发人员各司其职
+
+    - 前端 8080 5173
+    - 后端 3000 负责写api
+    - 前后端分离的好处
+    http://localhost:8080/
+    127.0.0.1   定位一台机器 可以运行多个程序
+
+    - UI 组件   数据管理 模块化
+        - vue 项目中负责请求管理 axios 
+        api
+
+- api/ 目录 请求模块 是vue项目的核心模块
+    前后端的协作    
+    - /api/index.js
+        业务 列出来各种请求接口 getBannerData
+    - /api/http.js  封装请求
+    - fetch xhr ？
+        流程性代码 重复编写
+    - 大型项目中 
+        请求次数可能比较多，模块化的需要
+        散落在各个组件里的请求是很难管理的
+    - axios 封装
+        - xhr,fetch 弱小了
+            new XMLHttpRequest()
+        - 好处
