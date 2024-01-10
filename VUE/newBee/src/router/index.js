@@ -21,7 +21,11 @@ const routes = [{
 {
     path: '/category',
     name: 'category',
-    component: () => import('@/views/category.vue')
+    component: () => import('@/views/Category.vue')
+},,{
+    path:'/login',
+    name:'login',
+    component: () => import('@/views/Login.vue')
 }]
 
 const router = createRouter({
