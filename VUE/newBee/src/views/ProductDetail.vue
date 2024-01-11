@@ -29,7 +29,7 @@
     </div>
     </div>
 
-    <FootBar />
+    <FootBar :goodsId="state.goodsId"/>
 
 </template>
 
@@ -41,10 +41,12 @@ import {getDetail} from '@/api/goods.js';
 import FootBar from '@/components/FootBar.vue';
 const route = useRoute()
 const state = reactive({
-    detail:{}
+    detail:{},
+    goodsId:''
 })
 onMounted(async()=>{// 从url上取到id并将id传给后端，获取该商品的详细信息
 const {id} = route.query
+state.goodsId = id;
 const {data} = await getDetail(id)
 console.log(data);
 state.detail = data;

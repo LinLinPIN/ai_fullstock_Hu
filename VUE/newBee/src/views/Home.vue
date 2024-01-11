@@ -35,8 +35,9 @@ import Swiper from '@/components/Swiper.vue';
 import { onMounted,reactive,nextTick } from 'vue';
 import { getHome } from '@/api/home.js'
 import { showToast } from 'vant';
-import GoodsList from '../components/GoodsList.vue';
+import GoodsList from '@/components/GoodsList.vue';
 import NavBar from '../components/NavBar.vue';
+
 
 const state = reactive({
     swiperList:[],
@@ -100,6 +101,7 @@ onMounted(async()=>{
     state.newGoodsList = data.newGoodses
     state.hotGoodsList = data.hotGoodses
     state.recommendGoodsList = data.recommendGoodses
+    
 })
 
 const goDetail = (name) =>{
