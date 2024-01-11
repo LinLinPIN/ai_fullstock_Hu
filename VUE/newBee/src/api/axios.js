@@ -5,7 +5,7 @@ import router from '@/router'
 // 将axios再封装一次，让之后项目中使用更加便捷
 axios.defaults.baseURL = '//backend-api-01.newbee.ltd/api/v1'
 axios.defaults.withCredentials = true // 是否允许在请求头中携带凭证
-axios.defaults.headers['token'] = 'xxxx'
+axios.defaults.headers['token'] = localStorage.getItem('token') || ''
 axios.defaults.headers.post['Content-Type'] = 'application/json'// 告诉后端，所有post请求传递的参数都是json对象
 
 // 响应拦截

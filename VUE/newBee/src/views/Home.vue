@@ -11,7 +11,8 @@
                 <router-link to="#" class="search-title"> 欢迎进店</router-link>
             </div>
 
-            <router-link to="/login" class="login">登录</router-link>
+            <router-link to="/login" class="login" v-if="!state.isLogin">登录</router-link>
+            <router-link to="/user" class="login" v-else><van-icon name="manager"></van-icon></router-link>
         </header>
         <Swiper id="test" :list="state.swiperList"/> 
         <div class="category-list">
@@ -85,11 +86,14 @@ const state = reactive({
     newGoodsList:[],
     hotGoodsList:[],
     recommendGoodsList:[],
-    headerActive: false
+    headerActive: false,
+    isLogin:false
 })
 
 // 请求banner数据
 onMounted(async()=>{
+    const token = localStorage.getItem('token')
+    if(token) state.isLogin = true;
     const { data } = await getHome()
     console.log(data);
     state.swiperList = data.data.carousels

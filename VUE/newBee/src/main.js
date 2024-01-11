@@ -13,6 +13,8 @@ import { Swipe, SwipeItem } from 'vant';
 import { Tabbar, TabbarItem } from 'vant';
 import { Icon } from 'vant';
 
+import { Form, Field, CellGroup } from 'vant';
+
 const app = createApp(App)
 app.use(Button)
 app.use(router)
@@ -22,4 +24,7 @@ app.use(Skeleton)
 app.use(Tabbar);
 app.use(TabbarItem);
 app.use(Icon);
+app.use(Form);
+app.use(Field);
+app.use(CellGroup);
 app.mount('#app')
