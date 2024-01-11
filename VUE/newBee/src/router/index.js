@@ -22,10 +22,14 @@ const routes = [{
     path: '/category',
     name: 'category',
     component: () => import('@/views/Category.vue')
-},,{
+},{
     path:'/login',
     name:'login',
     component: () => import('@/views/Login.vue')
+},{
+    path:'/product',
+    name:'product',
+    component:() => import('@/views/ProductDetail.vue')
 }]
 
 const router = createRouter({
