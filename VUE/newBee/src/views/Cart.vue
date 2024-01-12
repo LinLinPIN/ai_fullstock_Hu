@@ -8,21 +8,18 @@
                 <van-card :num="item.goodsCount" :price="item.sellingPrice"  :title="item.goodsName" class="goods-card"
                     :thumb="item.goodsCoverImg" >
                     <template #footer>
-                        <van-stepper v-model="item.goodsCount" min="1" max="5" @change="numChange"/>
+                        <van-stepper v-model="item.goodsCount" min="1" max="5" @change="numChange" :name="item.cartItemId" />
                     </template>
                 </van-card>
                 <template #right>
-                    <van-button square text="删除" type="danger" class="delete-button" />
+                    <van-button square text="删除" type="danger" class="delete-button" @click="deleteGoods(item.cartItemId)"/>
                 </template>
             </van-swipe-cell>
         </van-checkbox-group>
         </div>
     </div>
-    <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit">
-  <van-checkbox v-model="checked">全选</van-checkbox>
-  <template #tip>
-    你的收货地址不支持配送, <span @click="onClickLink">修改地址</span>
-    </template>
+    <van-submit-bar :price="totalPrice *100" button-text="提交订单" @submit="onSubmit" class="submit-bar">
+  <van-checkbox v-model="checkAll" class="checkAll" @click="allCheck">全选</van-checkbox>
     </van-submit-bar>
     <NavBar />
 </template>
@@ -30,24 +27,59 @@
 <script setup>
 import NavBar from '../components/NavBar.vue';
 import SimpleHeader from '../components/SimpleHeader.vue';
-import { ref,onMounted } from 'vue';
-import { getCart } from '../api/cart.js';
+import { ref,onMounted,computed } from 'vue';
+import { useStore } from 'vuex';
+import { getCart,modifyCart,deleteCart } from '../api/cart.js';
 
 const result = ref([])
 const list = ref([])
+const checkAll = ref(true)
+const store = useStore()
 
-const groupChange = () => {
-    console.log(result.value);
+const groupChange = () => {// 选中商品
+    checkAll.value = result.value.length>0&&result.value.length === list.value.length ? true : false;
 }
-const numChange = () => {
-   
+const numChange = async(num,detail) => {// 修改数量
+   const params = {
+    cartItemId:detail.name,
+    goodsCount:num
+   }
+   await modifyCart(params)
 }
 
 onMounted(async() => {
- const {data} = await getCart({pageNumber:1})
- list.value = data;
- result.value = data.map(item => item.cartItemId)
+    init();
 })
+
+const init = async() => {
+    const {data} = await getCart({pageNumber:1})
+    list.value = data;
+    result.value = data.map(item => item.cartItemId)
+}
+const onSubmit = () => {// 提交订单
+   
+}
+
+const totalPrice = computed(() => {// 计算属性中的依赖变量有变动时修改
+    let _list = list.value.filter((item) => result.value.includes(item.cartItemId))
+    const allPrice = _list.reduce((pre,item,index,arr)=>{
+        return pre += item.sellingPrice * item.goodsCount;
+    },0)
+    return allPrice;
+})
+
+const allCheck = () => {
+    if(!checkAll.value){// 大家都不选中
+        result.value = []
+    }else{
+        result.value = list.value.map(item => item.cartItemId)
+    }
+}
+const deleteGoods = async(id) => {
+    await deleteCart(id);
+    init()
+    store.dispatch('setCartCountAction')
+}
 </script>
 
 <style lang="less" scoped>
@@ -81,7 +113,10 @@ onMounted(async() => {
     top:0px;
 
 }
-.van-submit-bar__bar{
-    margin-bottom:44px ;
+.submit-bar{
+    bottom: 60px;
+}
+.checkAll{
+    width: 60px;
 }
 </style>
