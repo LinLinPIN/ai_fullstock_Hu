@@ -1,6 +1,6 @@
 <template>
     <div>
-        <SimpleHeader title="商品详情" />
+        <SimpleHeader title="商品详情" :back="true" />
         <div class="detail-content">
         <div class="detail-swipe-wrap">
             <van-swipe class="my-swipe"  indicator-color="#1baeae">

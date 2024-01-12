@@ -5,18 +5,12 @@ import './assets/style/reset.css'
 import router from './router'
 import store from './store'
 
-// 1. 引入你需要的组件
-import { Button,Skeleton } from 'vant';
-// 2. 引入组件样式
+
 import 'vant/lib/index.css';
-import { Swipe, SwipeItem } from 'vant';
+import { Swipe, SwipeItem,Button,Skeleton,Tabbar, TabbarItem,Icon } from 'vant';
+import { ActionBar, ActionBarIcon, ActionBarButton,Form, Field, CellGroup } from 'vant';
+import { SwipeCell,Card,Checkbox, CheckboxGroup,Stepper,SubmitBar } from 'vant';
 
-import { Tabbar, TabbarItem } from 'vant';
-import { Icon } from 'vant';
-
-import { Form, Field, CellGroup } from 'vant';
-
-import { ActionBar, ActionBarIcon, ActionBarButton } from 'vant';
 
 const app = createApp(App)
 app.use(Button)
@@ -34,4 +28,10 @@ app.use(ActionBar);
 app.use(ActionBarIcon);
 app.use(ActionBarButton);
 app.use(store)
+app.use(SwipeCell)
+app.use(Card)
+app.use(Checkbox);
+app.use(CheckboxGroup);
+app.use(Stepper);
+app.use(SubmitBar);
 app.mount('#app')
