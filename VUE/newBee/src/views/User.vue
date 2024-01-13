@@ -1,8 +1,9 @@
 <template>
-    <div>
-        Uesr
-    </div>
+  <div>
+    我的页面
+
     <NavBar />
+  </div>
 </template>
 
 <script setup>

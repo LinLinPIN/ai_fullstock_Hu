@@ -1,5 +1,6 @@
-import axios from "./axios.js";
+import axios from './axios.js';
 
-export function getHome(){
-    return axios.get('/index-infos')
+export function getHome() {
+  return axios.get('/index-infos')
 }
+
