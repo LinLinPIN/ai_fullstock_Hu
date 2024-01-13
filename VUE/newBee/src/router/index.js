@@ -30,6 +30,10 @@ const routes = [{
     path:'/product',
     name:'product',
     component:() => import('@/views/ProductDetail.vue')
+},{
+    path:'/create-order',
+    name:'create-order',
+    component:()=>import ('@/views/CreateOrder.vue')
 }]
 
 const router = createRouter({

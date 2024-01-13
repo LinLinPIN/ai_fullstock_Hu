@@ -30,11 +30,14 @@ import SimpleHeader from '../components/SimpleHeader.vue';
 import { ref,onMounted,computed } from 'vue';
 import { useStore } from 'vuex';
 import { getCart,modifyCart,deleteCart } from '../api/cart.js';
+import { showFailToast } from 'vant';
+import { useRouter } from 'vue-router';
 
 const result = ref([])
 const list = ref([])
 const checkAll = ref(true)
 const store = useStore()
+const router = useRouter();
 
 const groupChange = () => {// 选中商品
     checkAll.value = result.value.length>0&&result.value.length === list.value.length ? true : false;
@@ -57,7 +60,12 @@ const init = async() => {
     result.value = data.map(item => item.cartItemId)
 }
 const onSubmit = () => {// 提交订单
-   
+   if(result.value.length===0){
+    showFailToast('请选择至少一件商品进行结算');
+    return }
+
+    router.push({path:'/create-order',query:{cartItemIds:JSON.stringify(result.value)}});
+
 }
 
 const totalPrice = computed(() => {// 计算属性中的依赖变量有变动时修改
