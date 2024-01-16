@@ -4,7 +4,7 @@
             <div class="header-title">赣州市图书馆</div>
             <div class="header-search">
                 <van-icon name="search" class="search-icon"/>
-                <input type="text" placeholder="搜索你感兴趣的内容">
+                <input type="text" placeholder="搜索你感兴趣的内容" @click="toSearch">
             </div>
             <div class="header-category">
                 <van-tabs v-model:active="active" animated swipeable background="none" color="white" title-inactive-color="white" title-active-color="white" >
@@ -25,6 +25,13 @@ import Reading from '../components/Reading.vue'
 import Recommand from '../components/Recommand.vue'
 import Video from '../components/Video.vue'
 import Listening from '../components/Listening.vue'
+import {useRouter} from 'vue-router'
+
+const router = useRouter();
+
+const toSearch = () => {
+    router.push({path:'/search'})
+}
 
 
 </script>
@@ -46,11 +53,14 @@ import Listening from '../components/Listening.vue'
         height: 50px;
         text-align: center;
         position: relative;
+        .search-icon{
+            font-size:20px;
+        }
         input{
             height: 40px;
             border-radius: 30px;
             width: 9rem;
-            padding-left: 0.7rem;
+            padding-left: 1rem;
             box-sizing: border-box;
         }
     }
@@ -62,7 +72,8 @@ import Listening from '../components/Listening.vue'
 <style>
 .search-icon{
            position: absolute;
-           left: 0.6rem;
+           left: 0.9rem;
+           top:0.1rem;
         }
 :root:root {
     --van-tab-font-size:17px;

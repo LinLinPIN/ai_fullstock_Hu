@@ -21,6 +21,24 @@ const routes = [
         path:'/mine',
         name:'mine',
         component:()=>import('../views/Mine.vue')
+    },{
+        path:'/search',
+        name:'search',
+        component:()=>import('../views/Search.vue'),
+        children:[
+            {
+                path:'',
+                redirect:'/search/search-home'
+            },{
+                path:'search-home',
+                name:'search-home',
+                component:()=>import('../views/SearchHome.vue')
+            }
+        ]
+    },{
+        path:'/category',
+        name:'category',
+        component:()=>import('../views/Category.vue')
     }
 ];
 
