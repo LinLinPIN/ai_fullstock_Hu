@@ -25,12 +25,15 @@ import BooksList from '../components/BooksLIst.vue'
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 100px;
-    padding-top:75px;
+    height: 180px;
     margin-top: -60px;
     background: #fff;
+    padding: 0 10px;
+    padding-top:75px;
+    box-sizing: border-box;
     .list-item{
         width: 17%;
+       
         img{
             width: 100%;
         }
