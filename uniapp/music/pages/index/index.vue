@@ -8,9 +8,10 @@
 				</view>
 			</template>
 		</wyheader>
-
+		
+		<menuLeft></menuLeft>
 		<view class="text-area">
-			<text class="title">{{ title }}</text>
+			<text class="title">hello</text>
 		</view>
 	</view>
 </template>

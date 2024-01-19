@@ -1,17 +1,13 @@
 <template>
-	<view>
-		我的
-	</view>
+<view class="mine">
+	<wyheader icon="plus-filled">
+	</wyheader>
+	<menuLeft />
+</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				
-			};
-		}
-	}
+<script setup>
+
 </script>
 
 <style lang="scss">
