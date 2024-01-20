@@ -20,31 +20,59 @@
 				</swiper-item>
 			</swiper>
 		</view>
+		<!-- balls -->
+		<view class="balls">
+			<view class="ball-item" v-for="item in ball" :key=item.id>
+				<view class="icon">
+					<image :src="item.iconUrl"></image>
+				</view>
+				<text>{{item.name}}</text>
+			</view>
+		</view>
+		<songList :list="recommendList"/>
 	</view>
 </template>
 
 <script setup>
-import { apiGetBanner } from '../../api/index.js'
+import { apiGetBanner,apiGetBall,apiGetRecommendList } from '../../api/index.js'
 import { onLoad } from '@dcloudio/uni-app'
 import { ref,reactive } from 'vue'
 
-onLoad(async()=>{
-	getBanner()
+onLoad(()=>{
+	getBanner();
+	getBall();
+	getRecommendList();
 })
 
 
 const banner = ref([])
+const ball = ref([])
+const recommendList = ref([])
 
+// 获取banner图
 const getBanner = () => {
 	 apiGetBanner({type:1}).then(res=>{
 		banner.value = res.data.banners
 	})
 }
+
+// 获取圆形图标入口列表
+const getBall = async() => {
+	const { data:{ data:balls } } = await apiGetBall();
+	ball.value = balls
+}
+
+const getRecommendList = async() => {
+	const { data:{recommend:recommend}} = await apiGetRecommendList();
+	recommendList.value = recommend
+	console.log(recommendList);
+}
+
 </script>
 
 <style lang="scss" scoped>
 .index {
-	padding: 0 15rpx;
+	padding: 0 20rpx;
 	.search {
 		width: 500rpx;
 		height: 60rpx;
@@ -67,6 +95,29 @@ const getBanner = () => {
 			}
 		}
 	}
+	.balls{
+		display: flex;
+		overflow-x: scroll;
+		margin: 30rpx 0;
+		.ball-item{
+			flex: 0 0 20%;
+			text-align: center;
+			font-size: 25rpx;
+			.icon{
+				width: 70rpx;
+				height: 70rpx;
+				margin: 0 auto;
+				margin-bottom: 14rpx;
+				background-color:$uni-primary-color;
+				border-radius: 50%;
+				image{
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
+	}
+
 }
 
 </style>
