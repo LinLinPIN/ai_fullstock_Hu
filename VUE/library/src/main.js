@@ -3,7 +3,7 @@ import App from './App.vue'
 import 'lib-flexible/flexible'
 import './assets/style/reset.css'
 import router from './router'
-import {  Button,Tabbar,Tag, TabbarItem,Search,Tab, Tabs,Icon,Swipe, SwipeItem } from 'vant'
+import { Button, Tabbar, Tag, TabbarItem, Search, Tab, Tabs, Icon, Swipe, SwipeItem } from 'vant'
 import 'vant/lib/index.css'
 
 const app = createApp(App)

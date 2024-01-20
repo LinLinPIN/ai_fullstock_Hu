@@ -1,35 +1,34 @@
 <template>
-    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" >
-        <van-swipe-item v-for="item in list">
-        <img src="" alt="">
+    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+        <van-swipe-item v-for="item in list" :key="item.id">
+            <img :src="item.img" alt="">
         </van-swipe-item>
     </van-swipe>
 </template>
 
 <script setup>
-import { defineProps, onMounted } from 'vue';
+import { defineProps } from 'vue';
 
 const props = defineProps({
-    list:Object
+    list: Array
 })
 
 
 </script>
 
 <style lang="less" scoped>
-
 .my-swipe {
     .van-swipe-item {
-    height: 150px;
-    img{
-        width: 100%;
-        border-radius: 10px;
-    }}
+        height: 150px;
+        img {
+            width: 100%;
+            border-radius: 15px;
+        }
+    }
 }
-
 </style>
 <style>
 :root:root {
-    --van-swipe-indicator-size:10px;
+    --van-swipe-indicator-size: 10px;
 }
 </style>

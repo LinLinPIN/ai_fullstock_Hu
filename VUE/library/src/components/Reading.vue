@@ -1,6 +1,7 @@
 <template>
     <div>
         reading
+        <i class="iconfont icon-shudan"></i>
     </div>
 </template>
 
@@ -8,6 +9,4 @@
 
 </script>
 
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>
