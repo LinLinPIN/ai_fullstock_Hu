@@ -2,20 +2,20 @@
     <div class="recommand-content">
         <div class="recommand-title">
             <span>
-                <van-icon name="fire" />党建好书领读</span>
+                <van-icon name="fire" />{{ list.title }}</span>
             <button @click="goToCategory()">更多</button>
         </div>
         <div class="recommand-books">
-            <div class="book" v-for="item in 8">
+            <div class="book" v-for="item in list.list">
                 <div class="book-img">
-                    <img src="https://img3m5.ddimg.cn/39/18/11681048055-1_w_1703711411.jpg" alt="">
-                    <van-tag type="primary" color="rgb(102,102,102)" class="tag">书籍</van-tag>
+                    <img :src="item.img" alt="">
+                    <van-tag type="primary" color="rgb(102,102,102)" class="tag">{{ item.tag }}</van-tag>
                 </div>
                 <div class="book-title">
-                    钢之炼金术师钢之炼金术师钢之炼金术师钢之炼金术师钢之炼金术师
+                    {{ item.name }}
                 </div>
                 <div class="book-author">
-                    荒川弘
+                    {{ item.author }}
                 </div>
             </div>
         </div>
@@ -24,8 +24,12 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import { defineProps } from 'vue';
 
 const router = useRouter();
+const props = defineProps({
+    list: Array
+})
 
 const goToCategory = () => {
     router.push({ path: '/category' })
@@ -68,6 +72,8 @@ const goToCategory = () => {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     row-gap: 10px;
+    column-gap: 20px;
+    padding: 0.5rem;
 
     .book {
         .book-img {

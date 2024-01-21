@@ -7,8 +7,7 @@
                 <span>{{ item.title }}</span>
             </div>
         </div>
-        <BooksList />
-        <BooksList />
+        <BooksList v-for="item in booksList" :key="item.id" :list="item" />
     </div>
 </template>
 
@@ -17,8 +16,10 @@ import Swiper from '../components/Swiper.vue'
 import BooksList from '../components/BooksList.vue'
 import { onMounted, ref, reactive } from 'vue';
 import { getHome } from '../api/home';
+import { getBooksList } from '../api/booksList';
 
 const swipeList = ref([])
+const booksList = ref([])
 
 const ballList = [
     {
@@ -45,6 +46,7 @@ const ballList = [
 onMounted(async () => {
     const data = await getHome();
     swipeList.value = data.data.swipe;
+    booksList.value = (await getBooksList()).data.recommend;
 })
 </script>
 
