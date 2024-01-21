@@ -14,5 +14,4 @@ import { ref } from 'vue';
 const active = ref(0);
 </script>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

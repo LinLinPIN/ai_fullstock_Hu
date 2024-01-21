@@ -3,7 +3,7 @@
         <div class="recommand-title">
             <span>
                 <van-icon name="fire" />{{ list.title }}</span>
-            <button @click="goToCategory()">更多</button>
+            <button @click="goToCategory(list.title, list.more)">更多</button>
         </div>
         <div class="recommand-books">
             <div class="book" v-for="item in list.list">
@@ -31,8 +31,8 @@ const props = defineProps({
     list: Array
 })
 
-const goToCategory = () => {
-    router.push({ path: '/category' })
+const goToCategory = (title, more) => {
+    router.push({ path: '/category', query: { title: title, more: more } })
 }
 </script>
 
