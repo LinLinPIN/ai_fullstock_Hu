@@ -34,6 +34,9 @@ const show = async()=>{
 			display: flex;
 			justify-content: space-between;
 			font-size: 30rpx;
+			.title{
+				margin: 10px;
+			}
 		}
 		.recommend-bd{
 			display: flex;

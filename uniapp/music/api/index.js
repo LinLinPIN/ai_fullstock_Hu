@@ -27,6 +27,19 @@ export const apiGetRecommendList = () => {
 	})
 }
 
+export const apiGetRecommendSong = () => {
+	return uni.request({
+		url:baseUrl + '/recommend/songs',
+		method:'GET'
+	})
+}
+
+export const apiGetPersonalizedList = () => { // 雷达歌单
+	return uni.request({
+		url: baseUrl + '/personalized?limit=6',
+		method: 'GET'
+	})
+}
 // export const apiGetHomePage = () => {
 // 		return uni.request({
 // 			url:baseUrl + '/homepage/block/page',

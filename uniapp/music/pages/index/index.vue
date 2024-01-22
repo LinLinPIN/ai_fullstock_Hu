@@ -30,11 +30,15 @@
 			</view>
 		</view>
 		<songList :list="recommendList"/>
+		<!-- 推荐歌曲 -->
+		<recommendSong :list='recommendSongs'/>
+		<!-- 雷达歌单 -->
+		<songList :list="personalizeList"/>
 	</view>
 </template>
 
 <script setup>
-import { apiGetBanner,apiGetBall,apiGetRecommendList } from '../../api/index.js'
+import { apiGetBanner,apiGetBall,apiGetRecommendList,apiGetRecommendSong,apiGetPersonalizedList } from '../../api/index.js'
 import { onLoad } from '@dcloudio/uni-app'
 import { ref,reactive } from 'vue'
 
@@ -42,18 +46,28 @@ onLoad(()=>{
 	getBanner();
 	getBall();
 	getRecommendList();
+	getRecommendSong();
+	getPersonalizedList();
 })
 
 
 const banner = ref([])
 const ball = ref([])
 const recommendList = ref([])
+const recommendSongs = ref([])
+const personalizeList = ref([])
 
 // 获取banner图
 const getBanner = () => {
 	 apiGetBanner({type:1}).then(res=>{
 		banner.value = res.data.banners
 	})
+}
+
+const getPersonalizedList = async() => {
+	const data = await apiGetPersonalizedList();
+	personalizeList.value = data.data.result;
+	console.log(data);
 }
 
 // 获取圆形图标入口列表
@@ -65,7 +79,11 @@ const getBall = async() => {
 const getRecommendList = async() => {
 	const { data:{recommend:recommend}} = await apiGetRecommendList();
 	recommendList.value = recommend
-	console.log(recommendList);
+}
+
+const getRecommendSong = async() => {
+	const data = await apiGetRecommendSong();
+	recommendSongs.value = data.data.data.dailySongs
 }
 
 </script>
