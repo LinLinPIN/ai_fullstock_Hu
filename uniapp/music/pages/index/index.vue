@@ -4,87 +4,100 @@
 			<!-- 将内容填充到名为content的插槽中 -->
 			<template v-slot:content>
 				<view class="search">
-					<uni-search-bar  @confirm="search" @input="input" placeholder="歌曲"></uni-search-bar>
+					<uni-search-bar placeholder="歌曲"></uni-search-bar>
 				</view>
 			</template>
 		</wyheader>
 		
-		<menuLeft></menuLeft>
+		<!-- menu -->
+		<menuLeft />
+
 		<!-- banner -->
 		<view class="banner">
-			<swiper :indicator-dots="true" indicator-color="#eee" indicator-active-color="#d81e06" circular="true" :autoplay="true" :interval="3000" :duration="1000">
-				<swiper-item v-for="item in banner" :key="item.targetId">
+			<swiper :indicator-dots="true" :autoplay="false" :interval="3000" :duration="1000" indicator-color="#eee" indicator-active-color="#d81e06" circular>
+				<swiper-item v-for="item in state.banners" :key="item.encodeId">
 					<view class="swiper-item">
-						<image :src="item.pic" alt="" />
+						<image :src="item.pic" mode=""></image>
 					</view>
 				</swiper-item>
 			</swiper>
 		</view>
+		
 		<!-- balls -->
 		<view class="balls">
-			<view class="ball-item" v-for="item in ball" :key=item.id>
+			<view class="ball-item" v-for="item in state.balls" :key="item.id">
 				<view class="icon">
-					<image :src="item.iconUrl"></image>
+					<image :src="item.iconUrl" mode="aspectFill"></image>
 				</view>
 				<text>{{item.name}}</text>
 			</view>
 		</view>
-		<songList :list="recommendList"/>
+		
+		<!-- 推荐歌单 -->
+		<songList :list="state.recommendList" title="推荐歌单"/>
 		<!-- 推荐歌曲 -->
-		<recommendSong :list='recommendSongs'/>
-		<!-- 雷达歌单 -->
-		<songList :list="personalizeList"/>
+		<recommendSong :list="state.recommendSongs"/>
+		<!-- xxx雷达歌单 -->
+		<songList :list="state.personalizedList" title="蜗牛的雷达歌单"/>
+		
 	</view>
 </template>
 
 <script setup>
-import { apiGetBanner,apiGetBall,apiGetRecommendList,apiGetRecommendSong,apiGetPersonalizedList } from '../../api/index.js'
+import { apiGetBanner, apiGetBall, apiGetRecommendList, apiGetRecommendSongs, apiGetPersonalizedList } from '@/api/index.js'
 import { onLoad } from '@dcloudio/uni-app'
-import { ref,reactive } from 'vue'
+import { reactive } from 'vue';
 
-onLoad(()=>{
-	getBanner();
-	getBall();
-	getRecommendList();
-	getRecommendSong();
-	getPersonalizedList();
+const state = reactive({
+	banners: [],
+	balls: [],
+	recommendList: [],
+	recommendSongs: [],
+	personalizedList: []
 })
 
 
-const banner = ref([])
-const ball = ref([])
-const recommendList = ref([])
-const recommendSongs = ref([])
-const personalizeList = ref([])
+onLoad(() => {
+	getBanner()
+	getBall()
+	getRecommendList()
+	getRecommendSongs()
+	getPersonalizedList()
+})
 
 // 获取banner图
 const getBanner = () => {
-	 apiGetBanner({type:1}).then(res=>{
-		banner.value = res.data.banners
+	apiGetBanner({type: 2}).then(res => {
+		// console.log(res.data.banners);
+		state.banners = res.data.banners
 	})
 }
-
-const getPersonalizedList = async() => {
-	const data = await apiGetPersonalizedList();
-	personalizeList.value = data.data.result;
-	console.log(data);
-}
-
-// 获取圆形图标入口列表
+// 获取入口列表
 const getBall = async() => {
-	const { data:{ data:balls } } = await apiGetBall();
-	ball.value = balls
+	const { data: { data: balls } } = await apiGetBall()
+	// console.log(balls);
+	state.balls = balls
 }
-
+// 推荐歌单
 const getRecommendList = async() => {
-	const { data:{recommend:recommend}} = await apiGetRecommendList();
-	recommendList.value = recommend
+	const { data: { recommend: recommend }} = await apiGetRecommendList()
+	// console.log(recommend);
+	state.recommendList = recommend
+}
+// 推荐歌曲
+const getRecommendSongs = async() => {
+	const res = await apiGetRecommendSongs()
+	// console.log(res.data.data.dailySongs);
+	state.recommendSongs = res.data.data.dailySongs
+}
+// 雷达歌单
+const getPersonalizedList = async() => {
+	const res = await apiGetPersonalizedList()
+	console.log(res.data.result);
+	state.personalizedList = res.data.result
 }
 
-const getRecommendSong = async() => {
-	const data = await apiGetRecommendSong();
-	recommendSongs.value = data.data.data.dailySongs
-}
+
 
 </script>
 
@@ -105,11 +118,13 @@ const getRecommendSong = async() => {
 	}
 	.banner{
 		.swiper-item{
+			width: 100%;
 			height: 100%;
+			border-radius: 10px;
+			overflow: hidden;
 			image{
 				width: 100%;
 				height: 100%;
-				border-radius: 10px;
 			}
 		}
 	}
@@ -119,14 +134,14 @@ const getRecommendSong = async() => {
 		margin: 30rpx 0;
 		.ball-item{
 			flex: 0 0 20%;
+			font-size: 20rpx;
 			text-align: center;
-			font-size: 25rpx;
 			.icon{
 				width: 70rpx;
 				height: 70rpx;
 				margin: 0 auto;
 				margin-bottom: 14rpx;
-				background-color:$uni-primary-color;
+				background-color: $uni-primary-color;
 				border-radius: 50%;
 				image{
 					width: 100%;
@@ -135,7 +150,6 @@ const getRecommendSong = async() => {
 			}
 		}
 	}
-
+	
 }
-
 </style>

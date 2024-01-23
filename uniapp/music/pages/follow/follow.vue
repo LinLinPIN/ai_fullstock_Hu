@@ -5,12 +5,19 @@
 				<text>动态</text>
 			</template>
 		</wyheader>
-		<menuLeft></menuLeft>
+		
+		关注
 	</view>
 </template>
 
-<script setup>
-
+<script>
+	export default {
+		data() {
+			return {
+				
+			};
+		}
+	}
 </script>
 
 <style lang="scss">

@@ -38,13 +38,15 @@ const props = defineProps({
 
 const swiperList = ref([])
 onUpdated(() => {
-	    for(let i = 0;i<props.list.length;i++){
-	        const arr = []
-	        for(let j = 0;i<props.list.length&&j<3;i++,j++){
-	            arr.push(props.list[i])
-	        }
-	        swiperList.value.push(arr)
-	    }
+	let arr = []
+	props.list.forEach((item, i) => {
+		if (arr.length === 3) {
+			swiperList.value.push(arr)
+			arr = []
+		}
+		arr.push(item)
+	})
+	// console.log(swiperList.value, '------');
 })
 </script>
 
