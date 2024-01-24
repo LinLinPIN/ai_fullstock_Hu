@@ -29,7 +29,8 @@
 		needBox: {
 			type: Boolean,
 			default: true
-		}
+		},
+		fontColor: String
 	})
 	
 	const showMenu = () => {
@@ -60,6 +61,10 @@
 	width: 100%;
 	box-sizing: border-box;
 	z-index: 999;
+	color: v-bind(fontColor);
+	:deep(.uni-icons){
+		color: v-bind(fontColor) !important;
+	}
 }
 .box{
 	height: 180rpx;
