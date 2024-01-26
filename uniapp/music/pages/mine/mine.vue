@@ -88,7 +88,7 @@
 				</view>
 				<view class="list-sort">
 					<view class="tab" v-show="showTab[0]">
-						<view class="sort-item" @click="goSongsList" v-for="item in sort_playlist" :key="item.id">
+						<view class="sort-item" @click="goSongsList(item.id)" v-for="item in sort_playlist" :key="item.id">
 							<view class="pic">
 								<image :src="item.coverImgUrl" mode="aspectFill"></image>
 							</view>
@@ -112,6 +112,9 @@
 				</view>
 			</view>
 		</view>
+		
+		<!-- 播放器 -->
+		<musicPlayer bottom="100rpx"/>
 	</scroll-view>
 </template>
 
@@ -185,7 +188,7 @@ const changeNav = (index) => { // 0 1 2   1 3 5
 let bgOpacity = 0
 let fontColor = 255
 const handleScroll = (e) => { // 0 - 340
-	console.log(e.detail.scrollTop);
+	// console.log(e.detail.scrollTop);
 	let top = e.detail.scrollTop
 	if (top <= 340) {
 		bgOpacity = (top / 340).toFixed(2)
@@ -201,9 +204,9 @@ const handleScroll = (e) => { // 0 - 340
 	headerFontColor.value = `rgb(${fontColor}, ${fontColor}, ${fontColor})`
 }
 
-const goSongsList = () => {
+const goSongsList = (id) => {
 	uni.navigateTo({
-		url: "/pages/songsList/songsList"
+		url: `/pages/songsList/songsList?id=${id}`
 	})
 }
 </script>
