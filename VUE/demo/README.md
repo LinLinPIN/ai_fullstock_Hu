@@ -1,23 +1,19 @@
-# Vue 单页应用
-    项目只有一个html页面，所有的能在浏览器看见的页面都只是这个html中的一个代码片段
+# demo
 
-# v-model
-双向数据绑定，让data数据源中的变量和input中的value实时双向同步
+## Project setup
+```
+npm install
+```
 
-# 组件化的开发
-把代码分出去写成一个独立的文件，再引入回来生效
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-1. 代码复用
-2. 逻辑分明，结构清晰
+### Compiles and minifies for production
+```
+npm run build
+```
 
-# 父子组件通讯(传值)
-1. 父组件v-bind绑定 xxx属性
-2. 子组件通过props接受 xxx属性
-
-
-# 动手
-1. 只要列表有数据，列表就出现，购物车为空就不出现
-2. 将数据渲染完成
-3. 购买的数量可以加减，减少到1为最小值，就不能再减少
-4. 可以移除我不想购买的数据
-5. 实时计算总价格
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
