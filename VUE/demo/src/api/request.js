@@ -1,3 +1,3 @@
-const baseUrl = ' https://mock.presstime.cn/mock/65b8762a00c38cb139a5d98c/shoppingdemo'
+const baseUrl = 'http://101.43.139.143:8088'
 
 export default baseUrl

@@ -13,10 +13,20 @@
         </div>
         <div class="header-right">
             <i class="iconfont icon-search1" @click="showSearch"></i>
-            <i class="iconfont icon-gouwudai"></i>
-            <i class="iconfont icon-menu"></i>
+            <i class="iconfont icon-gouwudai" @click="showTele"></i>
+            <i class="iconfont icon-menu" @click="toLogin"></i>
         </div>
     </div>
+    <div class="telephone" v-if="showKeyboard">
+        <!-- 密码输入框 -->
+        <van-password-input :value="value" :focused="showKeyboard" @focus="showKeyboard = true" :mask="false"
+            :length="11" />
+        <!-- 数字键盘 -->
+        <van-number-keyboard v-model="value" :show="showKeyboard" @blur="showKeyboard = false" theme="custom"
+            close-button-text="完成" />
+
+    </div>
+
     <div class="box"></div>
 </template>
 
@@ -26,6 +36,8 @@ import { ref } from 'vue'
 
 const router = useRouter();
 const isSearch = ref(true)
+const value = ref('');
+const showKeyboard = ref(false);
 
 const goHome = () => {
     router.push('/home')
@@ -35,8 +47,16 @@ const showSearch = () => {
     isSearch.value = false
 }
 
+const showTele = () => {
+    showKeyboard.value = true
+}
+
 const hideSearch = () => {
     isSearch.value = true
+}
+
+const toLogin = () => {
+    router.push('/login')
 }
 </script>
 
@@ -115,5 +135,18 @@ const hideSearch = () => {
 
 .box {
     height: 1.2rem;
+}
+
+.telephone {
+    position: fixed;
+    z-index: 9999999999;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(237, 239, 246, 0.9);
+
+    .van-password-input {
+        z-index: 999999999999999;
+        top: 2rem;
+    }
 }
 </style>
