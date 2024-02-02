@@ -61,7 +61,6 @@
                 </div>
             </div>
         </van-floating-panel>
-
     </div>
 </template>
 
@@ -72,6 +71,7 @@ import { showDialog } from 'vant';
 import { ref, onMounted, reactive } from 'vue';
 import router from '@/router';
 import { getHome } from '@/api/home';
+import { useStore } from 'vuex';
 
 const show = ref(false)
 const chooseShow = ref(true)
@@ -80,6 +80,8 @@ const companyFlag = ref(false)
 const goodText = ref('')
 const quote = ref('')
 const title = ref('预计收入')
+const showRight = ref(false)
+const store = useStore()
 const state = reactive({
     homeList: [],
     companyList: []
@@ -89,8 +91,10 @@ onMounted(async () => {
     const { data } = await getHome(1, 10)
     state.homeList = data.businessDes[0]
     state.companyList = data.fireData[0]
+    store.commit('changeLoginState')
     console.log(state.companyList);
 })
+
 
 const showRevenue = () => {
     chooseShow.value = true

@@ -1,6 +1,6 @@
 <template>
     <div>
-        goos
+        goods
     </div>
 </template>
 

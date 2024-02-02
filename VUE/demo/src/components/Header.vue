@@ -26,18 +26,21 @@
             close-button-text="完成" />
 
     </div>
-
+    <van-popup v-model:show="showRight" position="right" :style="{ width: '70%', height: '100%' }" />
     <div class="box"></div>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router';
 import { ref } from 'vue'
+import { useStore } from 'vuex'
 
 const router = useRouter();
 const isSearch = ref(true)
 const value = ref('');
 const showKeyboard = ref(false);
+const showRight = ref(false)
+const store = useStore()
 
 const goHome = () => {
     router.push('/home')
@@ -56,7 +59,11 @@ const hideSearch = () => {
 }
 
 const toLogin = () => {
-    router.push('/login')
+    if (store.state.isLogin) {
+        showRight.value = true
+    }
+    else
+        router.push('/login')
 }
 </script>
 
