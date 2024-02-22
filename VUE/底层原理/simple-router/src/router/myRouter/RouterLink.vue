@@ -1,5 +1,5 @@
 <template>
-    <a :href="`#` + to">
+    <a :href="'#' + to">
         <slot></slot>
     </a>
 </template>
