@@ -35,7 +35,7 @@ arr.forEach(
 console.log(arr)
 
 arr.includes(4)//判断数组里面是否存在4,返回bool值
-arr.index(4)//返回数组4的下标，不存在就返回-1
+arr.index(4)//返回数字4的下标，不存在就返回-1
 arr.lastIndexOf(4)//返回最后一个4的下标
 
 //var arr=new Array()    返回一个空数组
