@@ -41,6 +41,7 @@ assign,concat,slice,解构
 - 深拷贝: 递归拷贝，复制对象内部的所有值，如果有引用类型的话，会递归拷贝
 层层拷贝，所有类型的属性值都会被复制，原对象的修改不会影响拷贝后的对象
 JSON.parse(JSON.stringify(obj))对象转为字符串再转回对象，无法处理对象内部的undefined，symbol，function，无法处理循环引用 obj.c = obj.b,obj.b.n = obj.c
+structuredClone()   
 
 手写浅拷贝,for in,并且判断是否是显示原型上的属性,hasOwnProperty()
 
