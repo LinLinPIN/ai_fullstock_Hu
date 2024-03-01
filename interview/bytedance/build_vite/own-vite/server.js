@@ -9,12 +9,13 @@ const fs = require('fs');// node的文件系统，内置的
 
 
 app.use(async ctx => {
+    // 上下文对象
     // Http 是基于请求响应的简单协议
     // index.html返回给客户端
     // 字符串二进制流
     // 代码在内存中运行
     // 读取文件系统里的index.html  fs模块
-    // js是异步的，node支持异步同步化
+    // js是异步的
     let content = fs.readFileSync('./index.html', 'utf-8');
     ctx.body = content;
 })
