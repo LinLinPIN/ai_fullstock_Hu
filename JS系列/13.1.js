@@ -19,7 +19,7 @@ Function.prototype.myBind = function () {
         // back 有没有被new
         if (this instanceof back) {
             // 让new作用于that身上
-            return new that(...args)
+            return new that(...args, ...arg)
         }
         return that.call(obj, ...[...args, ...arg])
 
