@@ -204,3 +204,4 @@ toString方法对于不同的数据类型，有着不同的返回值，数组的
     3. 调用实例对象中的send方法发送请求
     4. 监听onreadystateChange事件，通过判断readyState的值来获取到最终的数据
     5. 将数据更新到html页面
+
