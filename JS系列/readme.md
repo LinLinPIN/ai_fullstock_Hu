@@ -28,6 +28,27 @@ Number()
 通常发生在比较运算符 和 算术运算符
 [] ==![]
 
+## 对象转原始类型    obj.toString()      obj.valueOf() 对包装类生效
+toString() 在js中有多个版本
+- {}.toString() // "[Object class]"
+- 数组的toString()会将数组中所有的元素转化为字符串，并以逗号拼接
+- 函数的toString()会将整个函数体以字符串形式返回
+- Date的toString()会将整个date以字符串形式返回
+
+
+
+## 对象转字符串     ToPrimitive(obj,String)
+1. 判断obj是基本类型，则返回
+2. 否则调用 toString 方法，如果得到原始类型则返回
+3. 否则调用 valueOf 方法，如果得到原始类型，则返回
+4. 否则 报类型错误
+
+## 对象转数字   ToPrimitive(obj,number)
+1. 判断obj是基本类型，则返回
+2. 否则调用 valueOf 方法，如果得到原始类型，则返回
+3. 否则调用 toString 方法，如果得到原始类型，则返回
+4. 否则 报类型错误
+
 # 4. == 和 === 的区别？
     == 只判断值是否相等，类型不相等时会发生隐式类型转换
 
@@ -140,3 +161,46 @@ structuredClone()
 - 构造有返回值且返回值为引用类型时，会覆盖 new 当中的返回值
 
 # 13. call,apply,bind 底层原理
+    隐式绑定，让对象调用这个函数
+
+# 14. 说说js中的事件模型
+- 什么是事件流
+先捕获后冒泡
+
+- 事件模型的分类
+1. DOM0级 onclick (无法控制事件在捕获冒泡哪个阶段执行)
+2. DOM2级 addEventListener (可以控制事件在捕获冒泡哪个阶段执行)
+3. IE模型 attachEvent（无法控制事件在捕获冒泡哪个阶段执行）
+
+# 15. 说说typeof和instanceof的区别
+- typeof
+    可以判断除null外所有的基本数据类型，复杂数据类型都会输出object（通过二进制判断）以及能判定function
+    console.log(typeof null)// Object
+
+- instanceof
+    能判断变量是否为引用类型（原型链查找）原始类型没有隐式原型
+    let c = []
+    console.log(c instanceof Object)// c.__proto__ === Object.prototype
+    可以判断一个对象是否为另一个对象的实例
+    无法正确判断对象是否为一个数组或者数组为一个对象
+
+- Object.prototype.toString.call()
+toString方法对于不同的数据类型，有着不同的返回值，数组的toString方法返回的是''
+对象返回一个[Object,Object],所以使用call来绑定到数组上使用对象那个toString绑定到数组上来判断数组
+
+该方法会让变量能够调用对象上的toString函数，而对象的toString方法会返回[object Object]这个种类型的值
+
+- Array.isArray()
+只能用于判断一个变量是否是数组
+
+# 16. 说说Ajax的原理
+- 是什么：
+    Async Javascript and XML
+    是一种异步js和网页交互的技术，可以实现不刷新网页就跟服务器交换数据，更新页面
+
+- 实现过程
+    1. 创建Xhr实例对象
+    2. 调用实例对象中的open方法与服务器建立连接
+    3. 调用实例对象中的send方法发送请求
+    4. 监听onreadystateChange事件，通过判断readyState的值来获取到最终的数据
+    5. 将数据更新到html页面
