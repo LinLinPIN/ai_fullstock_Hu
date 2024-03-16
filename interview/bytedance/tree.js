@@ -65,4 +65,23 @@ function listToTree(data) {
     return res;
 }
 
+function listToTree2(data) {
+    const obj = {}
+    data.forEach(data => {
+        obj[data.id] = data
+    })
+    let list = [];
+    list.forEach(item => {
+        const parentId = obj[item.parentId]
+        if (item.parentId) {
+            parentId.children = parentId.children || []
+            parentId.children.push(item)
+        } else {
+            list.push(item)
+        }
+    })
+}
+
+
+
 console.log(listToTree(list));
