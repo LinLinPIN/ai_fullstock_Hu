@@ -1,13 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import NoteClass from '../views/NoteClass.vue'
 
-const routes = [{
+const routes = [
+  {
     path: '/login',
-    component: () => import('../views/Login.vue')
-}]
+    name: 'login',
+    component: () => import('@/views/Login.vue')
+  }, {
+    path: '/register',
+    component: () => import('@/views/Register.vue')
+  }, {
+    name: '/noteClass',
+    component: NoteClass
+  }
+]
 
 const router = createRouter({
-    routes,
-    history: createWebHistory()
+  history: createWebHistory(),
+  routes
 })
 
 export default router
