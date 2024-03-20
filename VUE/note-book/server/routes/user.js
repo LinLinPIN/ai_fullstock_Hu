@@ -11,7 +11,7 @@ router.post('/login', async (ctx) => {
 
   try {
     const result = await userLogin(username, password)
-    // console.log(result);
+    console.log(result);
     if (result.length) {  // 查到了
       let data = {
         id: result[0].id,
