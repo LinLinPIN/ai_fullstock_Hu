@@ -11,21 +11,31 @@
         </ul>
         <p class="empty" v-else>当前分类下还没有文章哦~~</p>
     </div>
-    <Hello />
 </template>
 
 
 <script setup>
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { onMounted, reactive } from 'vue'
-import Hello from '../components/Hello.vue';
+import axios from '@/api'
 
 const state = reactive({
     noteList: []
 })
 
-onMounted(() => {
+const route = useRoute()
+const router = useRouter()
 
+const goNoteDetail = (id) => {
+    router.push({ path: '/noteDetail', query: { id } })
+}
+
+onMounted(async () => {
+    // 请求某分类的数据
+    const res = await axios.post('/findNoteListByType', {
+        note_type: route.query.title
+    })
+    state.noteList = res.data
 })
 </script>
 

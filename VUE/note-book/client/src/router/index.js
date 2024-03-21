@@ -21,6 +21,9 @@ const routes = [
     meta: {
       title: '笔记列表'
     }
+  }, {
+    path: '/noteDetail',
+    component: () => import('@/views/NoteDetail.vue')
   }
 ]
 

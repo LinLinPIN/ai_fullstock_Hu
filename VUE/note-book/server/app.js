@@ -5,10 +5,11 @@ const app = new Koa()
 
 
 const user = require('./routes/user.js')
+const note = require('./routes/note.js')
 
 
 app.use(bodyParser())
-app.use(cors())  
+app.use(cors())
 
 
 
@@ -23,6 +24,7 @@ app.use(cors())
 // app.use(main)
 
 app.use(user.routes(), user.allowedMethods())
+app.use(note.routes(), note.allowedMethods())
 
 app.listen(3000, () => {
   console.log('listening on port 3000');

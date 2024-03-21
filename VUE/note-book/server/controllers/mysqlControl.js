@@ -48,14 +48,27 @@ const userFind = (username) => {
   return allService.query(_sql)
 }
 
+// 注册
 const userRegister = (username, password, nickname) => {
   let _sql = `insert into users (username,password,nickname) values("${username}","${password}","${nickname}");`
   return allService.query(_sql)
 }
 
+// 根据tpye查找日记列表
+const findNoteListByType = (type) => {
+  let _sql = `select * from note where note_type="${type}" `
+  return allService.query(_sql)
+}
+
+const findNoteDetailById = (id) => {
+  let _sql = `select * from note where id="${id}"`
+  return allService.query(_sql)
+}
 
 module.exports = {
   userLogin,
   userFind,
-  userRegister
+  userRegister,
+  findNoteListByType,
+  findNoteDetailById
 }
