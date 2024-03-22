@@ -3,6 +3,10 @@ import NoteClass from '../views/NoteClass.vue'
 
 const routes = [
   {
+    path: '/',
+    redirect: '/noteClass'
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('@/views/Login.vue'),
@@ -24,6 +28,9 @@ const routes = [
   }, {
     path: '/noteDetail',
     component: () => import('@/views/NoteDetail.vue')
+  }, {
+    path: '/notePublish',
+    component: () => import('@/views/NotePublish.vue')
   }
 ]
 

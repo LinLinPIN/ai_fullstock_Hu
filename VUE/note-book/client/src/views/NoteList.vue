@@ -1,5 +1,6 @@
 <template>
     <div class="note-list">
+        <Back />
         <ul v-if="state.noteList.length">
             <li v-for="item in state.noteList" :key="item.id" @click="goNoteDetail(item.id)">
                 <div class="img">
@@ -18,6 +19,7 @@
 import { useRoute, useRouter } from 'vue-router'
 import { onMounted, reactive } from 'vue'
 import axios from '@/api'
+import Back from '../components/Back.vue';
 
 const state = reactive({
     noteList: []
@@ -42,7 +44,7 @@ onMounted(async () => {
 <style lang="less" scoped>
 .note-list {
     width: 100%;
-    padding: 1rem 0.667rem 0;
+    padding: 1.5rem 0.667rem 0;
     box-sizing: border-box;
 
     ul {

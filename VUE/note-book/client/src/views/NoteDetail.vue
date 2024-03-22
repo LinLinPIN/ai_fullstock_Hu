@@ -1,5 +1,6 @@
 <template>
     <div class="note-detail">
+        <Back />
         <div class="note-img">
             <img :src="noteDetail.head_img" alt="">
         </div>
@@ -19,6 +20,7 @@ import { onMounted } from 'vue';
 import { useRoute } from 'vue-router'
 import { ref } from 'vue';
 import axios from '@/api'
+import Back from '@/components/Back.vue'
 
 const route = useRoute()
 const noteDetail = ref({})

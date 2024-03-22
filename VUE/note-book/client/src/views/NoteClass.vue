@@ -4,7 +4,7 @@
             <header>
                 <div><van-icon name="wap-nav" /></div>
                 <div>
-                    <van-icon name="edit" />
+                    <van-icon name="edit" @click="goPublish()" />
                     <van-icon name="like-o" />
                     <van-icon name="search" />
                 </div>
@@ -33,6 +33,10 @@ const noteClassList = [{ bgColor: '#f0aa84', title: '美食' },
 
 const goNoteList = (title) => {
     router.push({ path: '/noteList', query: { title: title } })
+}
+
+const goPublish = () => {
+    router.push('/notePublish')
 }
 </script>
 
