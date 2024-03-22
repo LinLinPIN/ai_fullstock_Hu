@@ -23,9 +23,21 @@
         我平时比较喜欢在掘金上写一些技术文章 -> es6
         通过阅读源码来提升代码能力 -> vuex
 
+- vue 源码学到了什么
+    - 严谨的代码逻辑
+        vuex 查找mutation时找到了才会执行
+    - 优秀的代码思想
+        提升自己的代码能力
+
 - vuex 源码学到了什么？
     - createStore 返回了store状态树单例
         因为他只会被调用一次，确保了状态的正确性
+    - provide/inject
+        父子组件通信    父组件provide发布，子组件inject
+        use(store) 启用了vuex生态
+        install 方法，传递app
+    - dispatch commit 方法
+        了解底层原理 -> 使用vue会更加得心应手
     - es6 class 封装 store 类
         options state函数返回的对象是初始数据
         使用reactive将其变成响应式
@@ -33,3 +45,20 @@
         完成响应式数据的概念 即 this.$state
     - _代表私有属性
         通过get方法来返回this.$state.data
+
+    - es6 class 语法
+        - es6 主要目的是让 JS 这门语言更加的适合大型项目企业级开发，简洁优雅
+            传统的面向对象支持
+            class constructor extends static get set 
+
+        - 依然是原型链式的面向对象
+        - class 只不过是语法糖
+        - proxy 代理
+            聊到 reactive 的源码
+        - Map WeakMap
+            JSON Object key只能是字符串，不能放对象
+            Set WeakSet
+        - es6 模块化
+            vite之所以比webpack快就是因为vite使用了自带的module以及使用了缓存，不需要像webpack使用require
+        - async await
+        - 箭头函数 解构 模板字符串 promise
