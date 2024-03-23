@@ -1,0 +1,13 @@
+import { createStore } from 'vuex'
+
+const state = {}
+const actions = {}
+const mutations = {}
+const modules = {}
+
+export default createStore({
+    state,
+    mutations,
+    actions,
+    modules
+})
