@@ -12,21 +12,26 @@
             <p class="title">{{ noteDetail.nickname }}</p>
             <div class="content" v-html="noteDetail.note_content"></div>
         </div>
+        <div class="edit" @click="goEdit">
+            <van-icon name="records-o" size="30" />
+        </div>
     </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue';
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { ref } from 'vue';
 import axios from '@/api'
 import Back from '@/components/Back.vue'
 
 const route = useRoute()
+const router = useRouter()
 const noteDetail = ref({})
-
+const goEdit = () => {
+    router.push({ path: '/notePublish', query: { id: route.query.id } })
+}
 onMounted(async () => {
-    console.log(route);
     const res = await axios.get('/findNoteDetailById', {
         params: { id: route.query.id }
     })
@@ -73,6 +78,19 @@ onMounted(async () => {
             color: rgba(16, 16, 16, 1);
             font-size: 0.3733rem;
         }
+    }
+
+    .edit {
+        position: fixed;
+        right: 10px;
+        bottom: 50px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(16, 16, 16, 0.3);
+        box-shadow: 0 0 5px #aaa;
+        text-align: center;
+        line-height: 50px;
     }
 }
 </style>

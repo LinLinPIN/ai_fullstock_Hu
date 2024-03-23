@@ -31,9 +31,12 @@
 <script setup>
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
-import { reactive, ref } from 'vue';
+import { reactive, ref, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router'
 import axios from '@/api'
 
+const router = useRouter()
+const route = useRoute()
 const state = reactive({
     content: '',
     title: '',
@@ -63,9 +66,25 @@ const publish = async () => {
         head_img: state.picture.length && state.picture[0].content || '',
         userId: id,
         nickname,
-        note_content: state.content
+        note_content: state.content,
+        id: route.query.id || ''
     })
+    showToast(res.msg)
+    setTimeout(() => {
+        router.push('/')
+    }, 1500)
 }
+// edit
+onMounted(async () => {
+    const res = await axios.get('/findNoteDetailById', {
+        params: { id: route.query.id }
+    })
+    console.log(res);
+    state.content = res.data[0].note_content
+    state.title = res.data[0].title
+    state.note_type = res.data[0].note_type
+    state.picture.push({ content: res.data[0].head_img, objectUrl: res.data[0].head_img })
+})
 </script>
 
 <style lang="less" scoped>

@@ -65,10 +65,14 @@ const findNoteDetailById = (id) => {
   return allService.query(_sql)
 }
 
-const publishNote = (note) => {
-  let _sql = `insert into note (userId,title,note_type,note_content,head_img,nickname,c_time,m_time)
-    values("${note.userId}","${note.title}","${note.note_type}","${note.note_content}","${note.head_img}","${note.nickname}","${note.c_time}","${note.m_time}")`
-  return allService.query(_sql)
+const publishNote = (note, edit) => {
+  let _sql = ''
+  if (edit) {
+    _sql = `update note set userId=${note.userId},title="${note.title}",note_type="${note.note_type}",note_content="${note.note_content}",head_img="${note.head_img}",nickname="${note.nickname}",c_time="${note.c_time}",m_time="${note.m_time}" where id=${note.id}`
+  } else {
+    _sql = `insert into note (userId,title,note_type,note_content,head_img,nickname,c_time,m_time,id)
+    values("${note.userId}","${note.title}","${note.note_type}","${note.note_content}","${note.head_img}","${note.nickname}","${note.c_time}","${note.m_time}",${note.id})`
+  } return allService.query(_sql)
 }
 
 module.exports = {
