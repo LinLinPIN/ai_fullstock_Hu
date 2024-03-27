@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">提交</button>
+    <script>
+        let btn = document.getElementById('btn')
+        btn.addEventListener('onclick', throttle(handle))
+        function handle() {
+            console.log('请求中');
+        }
+        function debounce(fn, wait) {
+            let Timer = null
+            return function (...args) {
+                // 销毁上一次的定时器
+                clearTimeout(Timer)
+                Timer = setTimeout(() => {
+                    fn.call(this, ...args)
+                }, wait);
+            }
+        }
+
+        function throttle(fn, wait) {
+            let pre = Date.now()
+            return function (...args) {
+                let cur = Date.now()
+                if (cur - pre > wait) {
+                    fn.call(this, ...args)
+                    pre = cur
+                }
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
