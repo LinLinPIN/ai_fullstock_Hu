@@ -8,9 +8,25 @@
 </head>
 
 <body>
-    <ul id="idcontainer"></ul>
+    <ul id="container"></ul>
     <script>
-
+        const total = 1000;
+        const once = 20;
+        const ul = document.getElementById("container");
+        function loop(curTotal) {
+            if (curTotal <= 0) return
+            let pageCount = Math.min(curTotal, once)
+            window.requestAnimationFrame(() => {
+                let fragment = document.createDocumentFragment();
+                for (let i = 0; i < pageCount; i++) {
+                    const li = document.createElement("li");
+                    li.innerHTML = ~~(Math.random() * total);
+                    fragment.appendChild(li);
+                }
+                ul.appendChild(fragment);
+                loop(curTotal - pageCount)
+            });
+        }
     </script>
 </body>
 
