@@ -14,7 +14,7 @@ class RootStore {
 }
 const rootStore = new RootStore()
 
-// const context = React.createContext(rootStore)
+
 
 const useStore = () => rootStore
 
