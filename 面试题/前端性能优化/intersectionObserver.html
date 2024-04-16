@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            height: 300px;
+            margin-bottom: 50px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <img src=""
+        data-original="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1lCyXq.img?w=768&h=480&m=6&x=201&y=167&s=1212&d=446"
+        alt="">
+    <img src="" data-original="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1lCwOY.img?w=640&h=276&m=6"
+        alt="">
+    <img src="" data-original="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1lCIuc.img?w=640&h=238&m=6"
+        alt="">
+    <img src="" data-original="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1lCB41.img?w=640&h=234&m=6"
+        alt="">
+    <img src="" data-original="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1lCB45.img?w=640&h=212&m=6"
+        alt="">
+    <img src="" data-original="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1lCB49.img?w=640&h=231&m=6"
+        alt="">
+    <img src="" data-original="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1lCyXN.img?w=640&h=238&m=6"
+        alt="">
+    <img src="" data-original="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1lCG1r.img?w=640&h=225&m=6"
+        alt="">
+    <img src="" data-original="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1lCB4k.img?w=640&h=242&m=6"
+        alt="">
+    <img src=""
+        data-original="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1lCB4l.img?w=640&h=384&m=6&x=300&y=90&s=62&d=62"
+        alt="">
+</body>
+<script>
+    const io = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.src = entry.target.dataset.original
+                    entry.target.removeAttribute('data-original')
+                    io.unobserve(entry.target)
+                }
+            })
+        }
+    )
+    const imgs = document.querySelectorAll('img[data-original]')
+    imgs.forEach(item => {
+        io.observe(item)
+    })
+</script>
+
+</html>
